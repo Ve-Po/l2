@@ -128,7 +128,7 @@ int main() {
 
   arr = (int*)malloc(m);
 
-  list = ListH();  //создали штуку для кэша
+  list = ListH();
   hash = createHash(n);
 
   for (i = 0; i < n; i++) {
