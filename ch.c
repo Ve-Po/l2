@@ -6,8 +6,9 @@ typedef struct hash_node hash_node;
 typedef struct Hash Hash;
 //CASH
 node *create_node();
-LinkedList *List(int size);
+LinkedList *List(int size); 
 node* create_node2(int data);
+node* search_for_place_in_list(int page, LinkedList *list);
 
 
 //HASH
@@ -35,15 +36,15 @@ struct Hash {
   hash_node **array;
 };
 //CASH
-LinkedList *List(int size) {//создаем список н размера
-  node* Node;
+LinkedList *List(int size) {
   node* tmp;
   LinkedList *list;
   list = (LinkedList*)malloc((sizeof (LinkedList)));
   int i;
   Node = create_node();
   list->head = Node;
-  list->size = size;
+  list->size = 0;
+  list->n_size = size;
   tmp = Node;
   for ( i = 1; i < size; i++) {
     tmp->next = create_node();
@@ -145,7 +146,7 @@ int main() {
 int Insert_value(LinkedList* list, Hash* hash, 
                    int page) 
 { 
-    node* pointer = search_for_place_in_cash(int value, LinkedList *list); 
+    node* pointer = search_for_place_in_list(int value, LinkedList *list); 
     if (pointer == NULL) 
         add_to_List_and_hash(list, hash, page); 
     if (pointer != list->head) {
@@ -173,7 +174,17 @@ int Insert_value(LinkedList* list, Hash* hash,
 } 
 
 
-
+node* search_for_place_in_list(int page, LinkedList *list) {
+  node* tmp = NULL;
+  tmp = list->head;
+  while (tmp->value != page) {
+    tmp = tmp -> next;
+    if (tmp == NULL) {
+      return NULL;
+    }
+  }
+  return tmp;
+}
 
 //search_for_place_in_cash
 
